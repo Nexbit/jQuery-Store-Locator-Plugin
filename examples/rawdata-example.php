@@ -32,7 +32,7 @@ $data = '<?xml version="1.0" encoding="utf-8"?>
 <head>
 	<title>Map Example - Raw Data</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="../dist/css/storelocator.css" />
+	<link rel="stylesheet" type="text/css" href="../dist/css/nx-storelocator.css" />
 </head>
 
 <body>
