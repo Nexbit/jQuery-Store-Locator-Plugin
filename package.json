@@ -49,7 +49,8 @@
 
     "build-task:sass:autoprefixer": "mkdirp dist/css && postcss src/scss/*.scss -d dist/css",
     "build-task:sass:scss-compile": "mkdirp dist/css && node-sass-chokidar --output-style compact --source-map true --source-map-contents --error-bell dist/css/ -o dist/css",
-    "build-task:res:copyfiles": "mkdirp dist/templates && cpx --clean \"src/templates/**/*.html\" dist/templates",
+    "build-task:res:templates": "mkdirp dist/templates && cpx --clean \"src/templates/**/*.html\" dist/templates",
+    "build-task:res:images": "mkdirp dist && cpx --clean \"src/**/*.{gif,png,svg,jpg,jpeg}\" dist",
     "build-task:js:lint": "jshint -c src/js/.jshintrc src/js && jshint -c test/.jshintrc test/",
     "build-task:js:uglifyjs": "mkdirp dist/js && npm-run-all -p uglify:js:*",
     "build-task:js:bannerize": "add-banner -t banner.tmpl dist/js/nx-storelocator.min.js",
