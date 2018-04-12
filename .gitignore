@@ -1,4 +1,22 @@
-.idea/
+*~
+.DS_Store
+
+## Windows #############
+
+# Windows image file caches
+Thumbs.db
+# Folder config file
+Desktop.ini
+
+## Windows - END ########
+
+## IDEA
+.ideaDataSources/
+.idea/dictionaries/
+.idea/workspace.xml
+dataSources/
+dataSources.ids
+
 .sass-cache/
 node_modules/
 cgi-bin/
