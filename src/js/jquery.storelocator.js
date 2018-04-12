@@ -1,3 +1,12 @@
+/*!
+nx-storelocator v3.0.99
+
+Copyright (c) 2016 Bjorn Holine
+Copyright (c) 2018 Paolo Furini
+
+@license MIT
+*/
+/* globals google, alert, Handlebars, InfoBubble, MarkerClusterer, console */
 ;(function ($, window, document, undefined) {
 	'use strict';
 
@@ -9,7 +18,7 @@
 	}
 
 	// Variables used across multiple methods
-	var $this, map, listTemplate, infowindowTemplate, dataTypeRead, originalOrigin, originalData, originalZoom, dataRequest, searchInput, addressInput, olat, olng, storeNum, directionsDisplay, directionsService, prevSelectedMarkerBefore, prevSelectedMarkerAfter, firstRun;
+	var $this, listTemplate, infowindowTemplate, dataTypeRead, originalOrigin, originalData, originalZoom, dataRequest, searchInput, addressInput, olat, olng, storeNum, directionsDisplay, directionsService, prevSelectedMarkerBefore, prevSelectedMarkerAfter, firstRun;
 	var featuredset = [], locationset = [], normalset = [], markers = [];
 	var filters = {}, locationData = {}, GeoCodeCalc = {}, mappingObj = {};
 
@@ -73,24 +82,25 @@
 		'taxonomyFilters'            : null,
 		'visibleMarkersList'         : false,
 		'xmlElement'                 : 'marker',
+        'searchExact'                : false,
 		// HTML elements
-		'addressID'                  : 'bh-sl-address',
-		'closeIcon'                  : 'bh-sl-close-icon',
-		'formContainer'              : 'bh-sl-form-container',
-		'formID'                     : 'bh-sl-user-location',
+		'addressID'                  : 'nx-storelocator__address',
+		'closeIcon'                  : 'nx-storelocator__close-icon',
+		'formContainer'              : 'nx-storelocator__form-container',
+		'formID'                     : 'nx-storelocator__user-location',
 		'geocodeID'                  : null,
-		'lengthSwapID'               : 'bh-sl-length-swap',
-		'loadingContainer'           : 'bh-sl-loading',
-		'locationList'               : 'bh-sl-loc-list',
-		'mapID'                      : 'bh-sl-map',
-		'maxDistanceID'              : 'bh-sl-maxdistance',
-		'modalContent'               : 'bh-sl-modal-content',
-		'modalWindow'                : 'bh-sl-modal-window',
-		'overlay'                    : 'bh-sl-overlay',
-		'regionID'                   : 'bh-sl-region',
-		'searchID'                   : 'bh-sl-search',
-		'sortID'                     : 'bh-sl-sort',
-		'taxonomyFiltersContainer'   : 'bh-sl-filters-container',
+		'lengthSwapID'               : 'nx-storelocator__length-swap',
+		'loadingContainer'           : 'nx-storelocator__loading',
+		'locationList'               : 'nx-storelocator__loc-list',
+		'mapID'                      : 'nx-storelocator__map',
+		'maxDistanceID'              : 'nx-storelocator__maxdistance',
+		'modalContent'               : 'nx-storelocator__modal-content',
+		'modalWindow'                : 'nx-storelocator__modal-window',
+		'overlay'                    : 'nx-storelocator__overlay',
+		'regionID'                   : 'nx-storelocator__region',
+		'searchID'                   : 'nx-storelocator__search',
+		'sortID'                     : 'nx-storelocator__sort',
+		'taxonomyFiltersContainer'   : 'nx-storelocator__filters-container',
 		// Templates
 		'infowindowTemplatePath'     : 'assets/js/plugins/storeLocator/templates/infowindow-description.html',
 		'listTemplatePath'           : 'assets/js/plugins/storeLocator/templates/location-list-description.html',
@@ -174,7 +184,7 @@
 
 			// Add directions panel if enabled
 			if (this.settings.inlineDirections === true) {
-				$('.' + this.settings.locationList).prepend('<div class="bh-sl-directions-panel"></div>');
+				$('.' + this.settings.locationList).prepend('<div class="nx-storelocator__directions-panel"></div>');
 			}
 
 			// Save the original zoom setting so it can be retrieved if taxonomy filtering resets it
@@ -244,8 +254,8 @@
 
 			// Remove markup
 			$('.' + this.settings.locationList + ' ul').empty();
-			if ($mapDiv.hasClass('bh-sl-map-open')) {
-				$mapDiv.empty().removeClass('bh-sl-map-open');
+			if ($mapDiv.hasClass('nx-storelocator__map-open')) {
+				$mapDiv.empty().removeClass('nx-storelocator__map-open');
 			}
 
 			// Remove modal markup
@@ -279,8 +289,8 @@
 			firstRun = false;
 			$(document).off('click.'+pluginName, '.' + this.settings.locationList + ' li');
 
-			if ( $('.' + this.settings.locationList + ' .bh-sl-close-directions-container').length ) {
-				$('.bh-sl-close-directions-container').remove();
+			if ( $('.' + this.settings.locationList + ' .nx-storelocator__close-directions-container').length ) {
+				$('.nx-storelocator__close-directions-container').remove();
 			}
 
 			if (this.settings.inlineDirections === true) {
@@ -294,7 +304,7 @@
 			}
 
 			if (this.settings.pagination === true) {
-				$(document).off('click.'+pluginName, '.bh-sl-pagination li');
+				$(document).off('click.'+pluginName, '.nx-storelocator__pagination li');
 			}
 		},
 
@@ -413,7 +423,7 @@
 			this.writeDebug('_loadTemplates');
 			var source;
 			var _this = this;
-			var templateError = '<div class="bh-sl-error">Error: Could not load plugin templates. Check the paths and ensure they have been uploaded. Paths will be wrong if you do not run this from a web server.</div>';
+			var templateError = '<div class="nx-storelocator__error">Error: Could not load plugin templates. Check the paths and ensure they have been uploaded. Paths will be wrong if you do not run this from a web server.</div>';
 			// Get the KML templates
 			if (this.settings.dataType === 'kml' && this.settings.listTemplateID === null && this.settings.infowindowTemplateID === null) {
 
@@ -516,8 +526,8 @@
 			}
 
 			// Reset button trigger
-			if ($('.bh-sl-reset').length && $('#' + this.settings.mapID).length) {
-				$(document).on('click.' + pluginName, '.bh-sl-reset', function () {
+			if ($('.nx-storelocator__reset').length && $('#' + this.settings.mapID).length) {
+				$(document).on('click.' + pluginName, '.nx-storelocator__reset', function () {
 					_this.mapReload();
 				});
 			}
@@ -628,7 +638,7 @@
 			// Full map blank start
 			if (_this.settings.fullMapStartBlank !== false) {
 				var $mapDiv = $('#' + _this.settings.mapID);
-				$mapDiv.addClass('bh-sl-map-open');
+				$mapDiv.addClass('nx-storelocator__map-open');
 				var myOptions = _this.settings.mapSettings;
 				myOptions.zoom = _this.settings.fullMapStartBlank;
 
@@ -1011,7 +1021,7 @@
 
 			// Previous page
 			if ( currentPage > 0 ) {
-				output += '<li class="bh-sl-next-prev" data-page="' + prevPage + '">' + this.settings.prevPage + '</li>';
+				output += '<li class="nx-storelocator__next-prev" data-page="' + prevPage + '">' + this.settings.prevPage + '</li>';
 			}
 
 			// Add the numbers
@@ -1019,7 +1029,7 @@
 				var n = p + 1;
 
 				if (p === currentPage) {
-					output += '<li class="bh-sl-current" data-page="' + p + '">' + n + '</li>';
+					output += '<li class="nx-storelocator__current" data-page="' + p + '">' + n + '</li>';
 				}
 				else {
 					output += '<li data-page="' + p + '">' + n + '</li>';
@@ -1028,7 +1038,7 @@
 
 			// Next page
 			if ( nextPage < totalPages ) {
-				output += '<li class="bh-sl-next-prev" data-page="' + nextPage + '">' + this.settings.nextPage + '</li>';
+				output += '<li class="nx-storelocator__next-prev" data-page="' + nextPage + '">' + this.settings.nextPage + '</li>';
 			}
 
 			return output;
@@ -1043,7 +1053,7 @@
 			this.writeDebug('paginationSetup',arguments);
 			var pagesOutput = '';
 			var totalPages;
-			var $paginationList = $('.bh-sl-pagination-container .bh-sl-pagination');
+			var $paginationList = $('.nx-storelocator__pagination-container .nx-storelocator__pagination');
 
 			// Total pages
 			if ( this.settings.storeLimit === -1 || locationset.length < this.settings.storeLimit ) {
@@ -1337,8 +1347,8 @@
 							_this.settings.callbackMarkerClick.call(this, marker, markerId, $selectedLocation, locationset[markerId]);
 						}
 
-						$('.' + _this.settings.locationList + ' li').removeClass('list-focus');
-						$selectedLocation.addClass('list-focus');
+						$('.' + _this.settings.locationList + ' li').removeClass('nx-storelocator__loc-item--selected');
+						$selectedLocation.addClass('nx-storelocator__loc-item--selected');
 
 						// Scroll list to selected marker
 						var $container = $('.' + _this.settings.locationList);
@@ -1561,7 +1571,7 @@
 
 				// Directions request
 				directionsDisplay.setMap(map);
-				directionsDisplay.setPanel($('.bh-sl-directions-panel').get(0));
+				directionsDisplay.setPanel($('.nx-storelocator__directions-panel').get(0));
 
 				var request = {
 					origin: origin,
@@ -1574,7 +1584,7 @@
 					}
 				});
 
-				$('.' + this.settings.locationList).prepend('<div class="bh-sl-close-directions-container"><div class="' + this.settings.closeIcon + '"></div></div>');
+				$('.' + this.settings.locationList).prepend('<div class="nx-storelocator__close-directions-container"><div class="' + this.settings.closeIcon + '"></div></div>');
 			}
 
 			$(document).off('click', '.' + this.settings.locationList + ' li .loc-directions a');
@@ -1604,7 +1614,7 @@
 				this.processForm(null);
 			}
 
-			$(document).off('click.'+pluginName, '.' + this.settings.locationList + ' .bh-sl-close-icon');
+			$(document).off('click.'+pluginName, '.' + this.settings.locationList + ' .nx-storelocator__close-icon');
 		},
 
 		/**
@@ -1616,11 +1626,11 @@
 			this.writeDebug('lengthUnitSwap',arguments);
 
 			if ($lengthSwap.val() === 'alt-distance') {
-				$('.' + this.settings.locationList + ' .loc-alt-dist').show();
-				$('.' + this.settings.locationList + ' .loc-default-dist').hide();
+				$('.' + this.settings.locationList + ' .nx-storelocator__loc-detail--dist.nx-storelocator__loc-detail--alt').show();
+				$('.' + this.settings.locationList + ' .nx-storelocator__loc-detail--dist.nx-storelocator__loc-detail--default').hide();
 			} else if ($lengthSwap.val() === 'default-distance') {
-				$('.' + this.settings.locationList + ' .loc-default-dist').show();
-				$('.' + this.settings.locationList + ' .loc-alt-dist').hide();
+				$('.' + this.settings.locationList + ' .nx-storelocator__loc-detail--dist.nx-storelocator__loc-detail--default').show();
+				$('.' + this.settings.locationList + ' .nx-storelocator__loc-detail--dist.nx-storelocator__loc-detail--alt').hide();
 			}
 		},
 
@@ -1857,7 +1867,7 @@
 					_this.settings.callbackSorting.call(this, _this.settings.sortBy);
 				}
 
-				if ($mapDiv.hasClass('bh-sl-map-open')) {
+				if ($mapDiv.hasClass('nx-storelocator__map-open')) {
 					_this.mapping(mappingObj);
 				}
 			});
@@ -2086,7 +2096,7 @@
 					_this.checkFilters();
 
 					filterVal = $(this).val();
-					filterContainer = $(this).closest('.bh-sl-filters').attr('id');
+					filterContainer = $(this).closest('.nx-storelocator__filters').attr('id');
 					filterKey = _this.getFilterKey(filterContainer);
 
 					if (filterKey) {
@@ -2097,7 +2107,7 @@
 								filters[filterKey].push(filterVal);
 							}
 
-							if ($('#' + _this.settings.mapID).hasClass('bh-sl-map-open') === true) {
+							if ($('#' + _this.settings.mapID).hasClass('nx-storelocator__map-open') === true) {
 								if ((olat) && (olng)) {
 									_this.settings.mapSettings.zoom = 0;
 									_this.processForm();
@@ -2112,7 +2122,7 @@
 							var filterIndex = filters[filterKey].indexOf(filterVal);
 							if (filterIndex > -1) {
 								filters[filterKey].splice(filterIndex, 1);
-								if ($('#' + _this.settings.mapID).hasClass('bh-sl-map-open') === true) {
+								if ($('#' + _this.settings.mapID).hasClass('nx-storelocator__map-open') === true) {
 									if ((olat) && (olng)) {
 										if (_this.countFilters() === 0) {
 											_this.settings.mapSettings.zoom = originalZoom;
@@ -2136,14 +2146,14 @@
 					_this.checkFilters();
 
 					filterVal = $(this).val();
-					filterContainer = $(this).closest('.bh-sl-filters').attr('id');
+					filterContainer = $(this).closest('.nx-storelocator__filters').attr('id');
 					filterKey = _this.getFilterKey(filterContainer);
 
 					// Check for blank filter on select since default val could be empty
 					if (filterVal) {
 						if (filterKey) {
 							filters[filterKey] = [filterVal];
-							if ($('#' + _this.settings.mapID).hasClass('bh-sl-map-open') === true) {
+							if ($('#' + _this.settings.mapID).hasClass('nx-storelocator__map-open') === true) {
 								if ((olat) && (olng)) {
 									_this.settings.mapSettings.zoom = 0;
 									_this.processForm();
@@ -2198,9 +2208,9 @@
 				}
 			});
 
-			// Re-add the list background colors
-			$('.' + this.settings.locationList + ' ul li:even').css('background', this.settings.listColor1);
-			$('.' + this.settings.locationList + ' ul li:odd').css('background', this.settings.listColor2);
+            // UPDATED Changed inline style with custom class
+            $('.' + this.settings.locationList + ' ul li:even').removeClass().addClass(this.settings.listColor1);
+            $('.' + this.settings.locationList + ' ul li:odd').removeClass().addClass(this.settings.listColor2);
 		},
 
 		/**
@@ -2256,7 +2266,7 @@
 			locList.empty();
 
 			// Append the no results message
-			noResults = $('<li><div class="bh-sl-noresults-title">' + this.settings.noResultsTitle +  '</div><br><div class="bh-sl-noresults-desc">' + this.settings.noResultsDesc + '</li>').hide().fadeIn();
+			noResults = $('<li><div class="nx-storelocator__noresults-title">' + this.settings.noResultsTitle +  '</div><br><div class="nx-storelocator__noresults-desc">' + this.settings.noResultsDesc + '</li>').hide().fadeIn();
 			locList.append(noResults);
 
 			// Center on the original origin or 0,0 if not available
@@ -2382,8 +2392,8 @@
 			var $selectedLocation = $('.' + _this.settings.locationList + ' li[data-markerid=' + markerId + ']');
 
 			// Focus on the list
-			$('.' + _this.settings.locationList + ' li').removeClass('list-focus');
-			$selectedLocation.addClass('list-focus');
+			$('.' + _this.settings.locationList + ' li').removeClass('nx-storelocator__loc-item--selected');
+			$selectedLocation.addClass('nx-storelocator__loc-item--selected');
 
 			$container.animate({
 				scrollTop: $selectedLocation.offset().top - $container.offset().top + $container.scrollTop()
@@ -2431,8 +2441,8 @@
 				}
 
 				// Focus on the list
-				$('.' + _this.settings.locationList + ' li').removeClass('list-focus');
-				$('.' + _this.settings.locationList + ' li[data-markerid=' + markerId + ']').addClass('list-focus');
+				$('.' + _this.settings.locationList + ' li').removeClass('nx-storelocator__loc-item--selected');
+				$('.' + _this.settings.locationList + ' li[data-markerid=' + markerId + ']').addClass('nx-storelocator__loc-item--selected');
 			});
 
 			// Prevent bubbling from list content links
@@ -2442,14 +2452,14 @@
 		},
 
 		/**
-		 * Output total results count if HTML element with .bh-sl-total-results class exists
+		 * Output total results count if HTML element with .nx-storelocator__total-results class exists
 		 *
 		 * @param locCount
 		 */
 		resultsTotalCount: function(locCount) {
 			this.writeDebug('resultsTotalCount',arguments);
 
-			var $resultsContainer = $('.bh-sl-total-results');
+			var $resultsContainer = $('.nx-storelocator__total-results');
 
 			if (typeof locCount === 'undefined' || locCount <= 0 || $resultsContainer.length === 0) {
 				return;
@@ -2480,7 +2490,7 @@
 				_this.directionsRequest(origin, parseInt(locID), map);
 
 				// Close directions
-				$(document).on('click.'+pluginName, '.' + _this.settings.locationList + ' .bh-sl-close-icon', function () {
+				$(document).on('click.'+pluginName, '.' + _this.settings.locationList + ' .nx-storelocator__close-icon', function () {
 					_this.closeDirections();
 				});
 			});
@@ -2618,7 +2628,7 @@
 				_this.settings.callbackSuccess.call(this, mappingObject, originPoint, data, page);
 			}
 
-			openMap = $mapDiv.hasClass('bh-sl-map-open');
+			openMap = $mapDiv.hasClass('nx-storelocator__map-open');
 
 			// Set a variable for fullMapStart so we can detect the first run
 			if (
@@ -2632,7 +2642,7 @@
 				_this.reset();
 			}
 
-			$mapDiv.addClass('bh-sl-map-open');
+			$mapDiv.addClass('nx-storelocator__map-open');
 
 			// Process the location data depending on the data format type
 			if (_this.settings.dataType === 'json' || _this.settings.dataType === 'jsonp') {
@@ -2704,7 +2714,11 @@
 							if (!taxFilters[k]) {
 								taxFilters[k] = [];
 							}
-							taxFilters[k][z] = '(?=.*\\b' + filters[k][z].replace(/([^\x00-\x7F]|[.*+?^=!:${}()|\[\]\/\\]|&\s+)/g, '') + '\\b)';
+							if (_this.settings.searchExact === true) {
+                                taxFilters[k][z] = '(?=.*\\b' + filters[k][z].replace(/([^\x00-\x7F]|[.*+?^=!:${}()|\[\]\/\\]|&\s+)/g, '') + '\\b)';
+                            } else {
+                                taxFilters[k][z] = '(?=' + filters[k][z].replace(/([^\x00-\x7F]|[.*+?^=!:${}()|\[\]\/\\]|&\s+)/g, '') + ')';
+                            }
 						}
 					}
 				}
@@ -2854,6 +2868,23 @@
 				_this.map.setCenter(center);
 			});
 
+            if (_this.settings.mapSettings.zoom !== 0) {
+                // Reset the zoom change only the first time the map is rendered
+                _this._initialZoomChangedListener = _this.map.addListener('zoom_changed', function() {
+                    var zoomChangeBoundsListener =
+                        _this.map.addListener('bounds_changed', function() {
+                            if (_this._initialZoom) {
+                                // Reset the zoom to the initial requested value
+                                _this.map.setZoom(_this.settings.mapSettings.zoom);
+                                _this._initialZoom = false;
+                                google.maps.event.removeListener(_this._initialZoomChangedListener);
+                                delete _this._initialZoomChangedListener;
+                            }
+                            google.maps.event.removeListener(zoomChangeBoundsListener);
+                        });
+                });
+                _this._initialZoom = true;
+            }
 
 			// Add map drag listener if setting is enabled and re-search on drag end
 			if (_this.settings.dragSearch === true ) {
@@ -2885,7 +2916,7 @@
 			_this.originMarker(_this.map, origin, originPoint);
 
 			// Handle pagination
-			$(document).on('click.'+pluginName, '.bh-sl-pagination li', function (e) {
+			$(document).on('click.'+pluginName, '.nx-storelocator__pagination li', function (e) {
 				e.preventDefault();
 				// Run paginationChange
 				_this.paginationChange($(this).attr('data-page'));
@@ -2953,15 +2984,15 @@
 
 			// MarkerClusterer setup
 			if ( typeof MarkerClusterer !== 'undefined' && _this.settings.markerCluster !== null ) {
-				var markerCluster = new MarkerClusterer(_this.map, markers, _this.settings.markerCluster);
+				_this._markerCluster = new MarkerClusterer(_this.map, markers, _this.settings.markerCluster);
 			}
 
 			// Handle clicks from the list
 			_this.listClick(_this.map, infowindow, storeStart, page);
 
-			// Add the list li background colors - this wil be dropped in a future version in favor of CSS
-			$('.' + _this.settings.locationList + ' ul > li:even').css('background', _this.settings.listColor1);
-			$('.' + _this.settings.locationList + ' ul > li:odd').css('background', _this.settings.listColor2);
+            // Updated, added class instaed of inline style
+            $('.' + _this.settings.locationList + ' ul > li:even').removeClass().addClass(_this.settings.listColor1);
+            $('.' + _this.settings.locationList + ' ul > li:odd').removeClass().addClass(_this.settings.listColor2);
 
 			// Visible markers list
 			_this.visibleMarkersList(_this.map, markers);

@@ -213,7 +213,7 @@
 			'state': 'MN'
 		}];
 
-		inclusiveTest = $.grep(locationset, function (val, i) {
+		inclusiveTest = $.grep(locationset, function (val) {
 			return $this.filterData(val, filter);
 		});
 
@@ -222,7 +222,7 @@
 
 		$this.settings.exclusiveFiltering = true;
 
-		exclusiveTest = $.grep(locationset, function (val, i) {
+		exclusiveTest = $.grep(locationset, function (val) {
 			return $this.filterData(val, filters);
 		});
 

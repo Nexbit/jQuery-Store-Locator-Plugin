@@ -1,4 +1,5 @@
 ﻿//Geocode function for the origin location
+/* globals $, google, alert */
 function GoogleGeocode() {
   var geocoder = new google.maps.Geocoder();
   this.geocode = function(address, callbackFunction) {
