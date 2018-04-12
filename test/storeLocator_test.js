@@ -35,8 +35,8 @@
   test('is chainable', 1, function() {
     // Not a bad test to run on collection methods.
     strictEqual(this.elems.storeLocator({
-			'infowindowTemplatePath': '../dist/assets/js/plugins/storeLocator/templates/infowindow-description.html',
-			'listTemplatePath': '../dist/assets/js/plugins/storeLocator/templates/location-list-description.html'
+			'infowindowTemplatePath': '../dist/templates/infowindow-description.html',
+			'listTemplatePath': '../dist/templates/location-list-description.html'
 		}), this.elems, 'Should be chainable');
   });
 
@@ -45,8 +45,8 @@
     // This will run before each test in this module.
     setup: function() {
       $('#bh-sl-map-container').storeLocator({
-				'infowindowTemplatePath': '../dist/assets/js/plugins/storeLocator/templates/infowindow-description.html',
-				'listTemplatePath': '../dist/assets/js/plugins/storeLocator/templates/location-list-description.html',
+				'infowindowTemplatePath': '../dist/infowindow-description.html',
+				'listTemplatePath': '../dist/templates/location-list-description.html',
 				'taxonomyFilters': {
 					'category' : 'category-filters-container1',
 					'features' : 'category-filters-container2',

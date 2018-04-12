@@ -1,0 +1,133 @@
+/* NOTE: it was 768px originally, but overridden for Zampotta weird theme*/
+/* InfoBubble font size */
+.nx-storelocator__window { font-size: 13px; }
+
+.nx-storelocator__error { clear: both; color: #ae2118; float: left; font-weight: bold; padding: 10px 0; width: 100%; }
+
+/* Avoid image issues with Google Maps and CSS resets */
+.nx-storelocator__map-container img { border-radius: 0 !important; box-shadow: none !important; max-height: none !important; max-width: none !important; }
+
+.nx-storelocator { box-sizing: border-box; color: #555; float: left; font: normal 14px/1.4 inherit; width: 100%; /* Avoid issues with Google Maps and CSS frameworks */ /* button { background: darken( $blue, 5% ); border: none; border-radius: 4px; color: $white; cursor: pointer; float: left; font: bold 14px/1.4 $baseFont; margin-top: 3px; padding: 6px 12px; white-space: nowrap; -webkit-border-radius: 4px; } */ }
+
+.nx-storelocator > * { box-sizing: content-box !important; }
+
+.nx-storelocator .nx-storelocator__form { clear: left; float: left; margin-top: 15px; width: 100%; }
+
+.nx-storelocator .nx-storelocator__search-box { float: left; margin-top: 3px; margin-bottom: 7px; width: 100%; /* Tablet up*/ }
+
+@media (min-width: 941px) { .nx-storelocator .nx-storelocator__search-box { width: auto; } }
+
+.nx-storelocator .nx-storelocator__search-box .nx-storelocator__form-label { display: block; font-weight: bold; width: 100%; /* Tablet up*/ }
+
+@media (min-width: 941px) { .nx-storelocator .nx-storelocator__search-box .nx-storelocator__form-label { display: inline-block; width: auto; } }
+
+.nx-storelocator .nx-storelocator__search-box .nx-storelocator__form-input { box-sizing: border-box; /*border: 1px solid $gray;*/ /*border-radius: 4px;*/ font: normal 14px/1.4 inherit; margin: 15px 0; padding: 6px 12px; width: 100%; -webkit-border-radius: 4px; /* Tablet up*/ }
+
+@media (min-width: 941px) { .nx-storelocator .nx-storelocator__search-box .nx-storelocator__form-input { width: auto; margin: 0 15px 0 10px; } }
+
+.nx-storelocator .nx-storelocator__loc-detail--dist.nx-storelocator__loc-detail--alt { display: none; }
+
+.nx-storelocator .nx-storelocator__button { margin-top: 3px; white-space: nowrap; }
+
+.nx-storelocator .nx-storelocator__button--search { clear: both; margin-top: 6px; /* Tablet up*/ }
+
+@media (min-width: 941px) { .nx-storelocator .nx-storelocator__button--search { margin-left: 10px; } }
+
+.nx-storelocator .nx-storelocator__loading { background: url(../img/ajax-loader.gif) no-repeat; float: left; margin: 4px 0 0 10px; height: 16px; width: 16px; }
+
+.nx-storelocator .nx-storelocator__filters-container { clear: both; float: left; margin: 15px 0; width: 100%; }
+
+.nx-storelocator .nx-storelocator__filters-container .nx-storelocator__filters { float: left; list-style: none; margin: 0 100px 0 0; padding: 0; }
+
+.nx-storelocator .nx-storelocator__filters-container .nx-storelocator__filters li { clear: left; display: block; float: left; margin: 5px 0; width: 100%; }
+
+.nx-storelocator .nx-storelocator__filters-container .nx-storelocator__filters li label { display: inline; vertical-align: text-bottom; }
+
+.nx-storelocator .nx-storelocator__filters-container .nx-storelocator__filters li input { display: block; float: left; margin-right: 8px; }
+
+.nx-storelocator .nx-storelocator__filters-container .nx-storelocator__filters li select { box-sizing: border-box; /*border: 1px solid $gray;*/ /*border-radius: 4px;*/ font: normal 14px/1.4 inherit; padding: 6px 12px; -webkit-border-radius: 4px; }
+
+.nx-storelocator .nx-storelocator__map-container { clear: left; float: left; margin-top: 15px; width: 100%; /* Tablet large up*/ }
+
+@media (min-width: 1024px) { .nx-storelocator .nx-storelocator__map-container { margin-bottom: 30px; } }
+
+.nx-storelocator .nx-storelocator__map-container a { /*color: $blue;*/ text-decoration: none; }
+
+.nx-storelocator .nx-storelocator__map-container a:active, .nx-storelocator .nx-storelocator__map-container a:focus, .nx-storelocator .nx-storelocator__map-container a:hover { text-decoration: underline; }
+
+.nx-storelocator .nx-storelocator__loc-list-container { font-size: 13px; height: 530px; overflow-x: auto; width: 100%; /* Tablet large up*/ }
+
+@media (min-width: 1024px) { .nx-storelocator .nx-storelocator__loc-list-container { width: 30%; } }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__loc-list { display: block; clear: left; float: left; width: 100%; list-style: none; margin: 0; padding: 0; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__loc-list .nx-storelocator__loc-item { border: 1px solid #fff; /* Adding this to prevent moving li elements when adding the list-focus class*/ box-sizing: border-box; clear: left; cursor: pointer; display: block; float: left; width: 100%; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__loc-label { background: #00192d; border-radius: 99px; color: #fff; display: block; float: left; font-family: Helvetica, Arial; font-weight: bold; margin: 10px 0 0 15px; padding: 3px 9px; text-align: center; width: auto; min-width: 13px; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__loc-details { float: left; margin-left: 6px; width: 80%; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__loc-details .nx-storelocator__loc-content { padding: 10px; line-height: 18px; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__loc-details .nx-storelocator__loc-detail--dist { color: #8e8e8e; font-style: italic; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__loc-item--selected { border: 1px solid rgba(0, 82, 147, 0.4); transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__close-directions-container { height: 20px; position: relative; width: 100%; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__close-directions-container .nx-storelocator__close-icon { right: 6px; top: 0; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__directions-panel { margin: 0 2%; /* Avoid issues with table-layout */ }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__directions-panel table { table-layout: auto; width: 100%; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__directions-panel table, .nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__directions-panel td { vertical-align: middle; border-collapse: separate; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__directions-panel td { padding: 1px; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__directions-panel .adp-placemark { margin: 10px 0; border: 1px solid #c0c0c0; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__directions-panel .adp-marker { padding: 3px; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__noresults-title { font-weight: bold; margin: 15px; }
+
+.nx-storelocator .nx-storelocator__loc-list-container .nx-storelocator__noresults-desc { margin: 0 15px; }
+
+.nx-storelocator .nx-storelocator__loc-detail--name { font-size: 15px; font-weight: bold; }
+
+.nx-storelocator .nx-storelocator__map { float: left; height: 530px; width: 100%; /* Tablet large up*/ }
+
+@media (min-width: 1024px) { .nx-storelocator .nx-storelocator__map { width: 70%; } }
+
+.nx-storelocator .nx-storelocator__pagination-container { clear: both; }
+
+.nx-storelocator .nx-storelocator__pagination-container ol { list-style-type: none; margin: 0; padding: 10px 0; text-align: center; }
+
+.nx-storelocator .nx-storelocator__pagination-container ol li { color: #005293; cursor: pointer; display: inline-block; font: bold 14px inherit; padding: 10px; }
+
+.nx-storelocator .nx-storelocator__pagination-container ol .nx-storelocator__current { color: #555; cursor: auto; text-decoration: none; }
+
+.nx-storelocator__loc-detail--features { font-style: italic; }
+
+.nx-storelocator__loc-detail--addr { margin-top: 5px; }
+
+/* Modal window */
+.nx-storelocator__overlay { background: url(../img/overlay-bg.png) repeat; height: 100%; left: 0; position: fixed; top: 0; width: 100%; z-index: 10000; }
+
+.nx-storelocator__overlay .nx-storelocator__modal-window { background: #fff; border-radius: 10px; box-shadow: 0 0 10px #656565; position: absolute; left: 50%; margin-left: -460px; /* width divided by 2 */ margin-top: 60px; height: 620px; width: 920px; z-index: 10010; }
+
+.nx-storelocator__overlay .nx-storelocator__modal-window .nx-storelocator__map-container { margin-top: 50px; /* increase map container margin */ }
+
+.nx-storelocator__overlay .nx-storelocator__modal-window .nx-storelocator__modal-content { float: left; padding: 0 1%; /* there's already a margin on the top of the map-container div */ width: 98%; }
+
+.nx-storelocator__overlay .nx-storelocator__modal-window .nx-storelocator__close-icon { right: 22px; top: 13px; }
+
+.nx-storelocator__close-icon { cursor: pointer; height: 24px; position: absolute; width: 24px; }
+
+.nx-storelocator__close-icon:after, .nx-storelocator__close-icon:before { background: #ccc; content: ''; display: block; height: 24px; margin: -3px 0 0 -1px; position: absolute; bottom: 0; left: 50%; right: 3px; top: 3px; width: 3px; -webkit-transform: rotate(45deg); transform: rotate(45deg); }
+
+.nx-storelocator__close-icon:hover:after, .nx-storelocator__close-icon:hover:before { background: #b3b3b3; }
+
+.nx-storelocator__close-icon:before { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
+
+/*# sourceMappingURL=storelocator.css.map */
