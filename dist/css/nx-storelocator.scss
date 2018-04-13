@@ -9,7 +9,6 @@ $black: #000;
 $blue: #005293;
 $red: #ae2118;
 $yellow: #ffff00;
-$baseFont: inherit;
 $arialFont: Helvetica, Arial;
 $tablet: '(min-width: 941px)';  /* NOTE: it was 768px originally, but overridden for Zampotta weird theme*/
 $tabletLarge: '(min-width: 1024px)';
@@ -19,7 +18,7 @@ $tabletLarge: '(min-width: 1024px)';
             box-sizing: border-box;
     color: $textgray;
     float: left;
-    font: normal 14px/1.4 $baseFont;
+    /*font: normal 14px/1.4 $baseFont;*/
     width: 100%;
 
     /* Avoid issues with Google Maps and CSS frameworks */
@@ -97,7 +96,7 @@ $tabletLarge: '(min-width: 1024px)';
 .nx-storelocator__form-input {
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    font: normal 14px/1.4 $baseFont;
+    /*font: normal 14px/1.4 $baseFont;*/
     margin: 15px 0;
     padding: 6px 12px;
     width: 100%;
@@ -176,7 +175,7 @@ button {
         select {
             -webkit-box-sizing: border-box;
                     box-sizing: border-box;
-            font: normal 14px/1.4 $baseFont;
+            /*font: normal 14px/1.4 $baseFont;*/
             padding: 6px 12px;
         }
     }
@@ -249,24 +248,23 @@ button {
 }
 
 .nx-storelocator__loc-label {
+    display: block;
+    float: left;
+    width: 31px;
+    height: 25px;
+    margin: 10px 0 0 10px;
+    padding: 3px 0 2px 1px;
     background: darken( $blue, 20% );
     border-radius: 99px;
     color: $white;
-    display: block;
-    float: left;
     font-family: $arialFont;
     font-weight: bold;
-    margin: 10px 0 0 15px;
-    padding: 3px 9px;
     text-align: center;
-    width: auto;
-    min-width: 13px;
 }
 
 .nx-storelocator__loc-details {
-    float: left;
-    margin-left: 6px;
-    width: 80%;
+    height: inherit;
+    overflow: hidden;
 }
 
 .nx-storelocator__loc-content {
@@ -364,7 +362,8 @@ button {
             color: $blue;
             cursor: pointer;
             display: inline-block;
-            font: bold 14px $baseFont;
+            font-weight: bold;
+            /*font: bold 14px $baseFont;*/
             padding: 10px;
         }
 

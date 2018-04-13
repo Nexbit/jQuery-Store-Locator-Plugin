@@ -1,5 +1,5 @@
 /* NOTE: it was 768px originally, but overridden for Zampotta weird theme*/
-.nx-storelocator { -webkit-box-sizing: border-box; box-sizing: border-box; color: #555; float: left; font: normal 14px/1.4 inherit; width: 100%; /* Avoid issues with Google Maps and CSS frameworks */ }
+.nx-storelocator { -webkit-box-sizing: border-box; box-sizing: border-box; color: #555; float: left; /*font: normal 14px/1.4 $baseFont;*/ width: 100%; /* Avoid issues with Google Maps and CSS frameworks */ }
 
 .nx-storelocator > * { -webkit-box-sizing: content-box !important; box-sizing: content-box !important; }
 
@@ -24,7 +24,7 @@
 
 @media (min-width: 941px) { .nx-storelocator__form-label { display: inline-block; width: auto; } }
 
-.nx-storelocator__form-input { -webkit-box-sizing: border-box; box-sizing: border-box; font: normal 14px/1.4 inherit; margin: 15px 0; padding: 6px 12px; width: 100%; /* Tablet up*/ }
+.nx-storelocator__form-input { -webkit-box-sizing: border-box; box-sizing: border-box; /*font: normal 14px/1.4 $baseFont;*/ margin: 15px 0; padding: 6px 12px; width: 100%; /* Tablet up*/ }
 
 @media (min-width: 941px) { .nx-storelocator__form-input { width: auto; margin: 0 15px 0 10px; } }
 
@@ -48,7 +48,7 @@
 
 .nx-storelocator__filters li input { display: block; float: left; margin-right: 8px; }
 
-.nx-storelocator__filters li select { -webkit-box-sizing: border-box; box-sizing: border-box; font: normal 14px/1.4 inherit; padding: 6px 12px; }
+.nx-storelocator__filters li select { -webkit-box-sizing: border-box; box-sizing: border-box; /*font: normal 14px/1.4 $baseFont;*/ padding: 6px 12px; }
 
 .nx-storelocator__map-container { clear: left; float: left; margin-top: 15px; width: 100%; /* Tablet large up*/ }
 
@@ -69,9 +69,9 @@
 
 .nx-storelocator__loc-item--selected { border: 1px solid rgba(0, 82, 147, 0.4); -webkit-transition: border 0.2s linear 0s, -webkit-box-shadow 0.2s linear 0s; transition: border 0.2s linear 0s, -webkit-box-shadow 0.2s linear 0s; transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s; transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s, -webkit-box-shadow 0.2s linear 0s; }
 
-.nx-storelocator__loc-label { background: #00192d; border-radius: 99px; color: #fff; display: block; float: left; font-family: Helvetica, Arial; font-weight: bold; margin: 10px 0 0 15px; padding: 3px 9px; text-align: center; width: auto; min-width: 13px; }
+.nx-storelocator__loc-label { display: block; float: left; width: 31px; height: 25px; margin: 10px 0 0 10px; padding: 3px 0 2px 1px; background: #00192d; border-radius: 99px; color: #fff; font-family: Helvetica, Arial; font-weight: bold; text-align: center; }
 
-.nx-storelocator__loc-details { float: left; margin-left: 6px; width: 80%; }
+.nx-storelocator__loc-details { height: inherit; overflow: hidden; }
 
 .nx-storelocator__loc-content { padding: 10px; line-height: 18px; }
 
@@ -112,7 +112,7 @@
 
 .nx-storelocator__pagination-container ol { list-style-type: none; margin: 0; padding: 10px 0; text-align: center; }
 
-.nx-storelocator__pagination-container ol li { color: #005293; cursor: pointer; display: inline-block; font: bold 14px inherit; padding: 10px; }
+.nx-storelocator__pagination-container ol li { color: #005293; cursor: pointer; display: inline-block; font-weight: bold; /*font: bold 14px $baseFont;*/ padding: 10px; }
 
 .nx-storelocator__pagination-container ol .nx-storelocator__current { color: #555; cursor: auto; text-decoration: none; }
 
