@@ -1,11 +1,4 @@
-/*!
-nx-storelocator v3.0.99
 
-Copyright (c) 2016 Bjorn Holine
-Copyright (c) 2018 Paolo Furini
-
-@license MIT
-*/
 /* globals google, alert, Handlebars, InfoBubble, MarkerClusterer, console */
 ;(function ($, window, document, undefined) {
 	'use strict';
@@ -51,8 +44,8 @@ Copyright (c) 2018 Paolo Furini
 		'infoBubble'                 : null,
 		'inlineDirections'           : false,
 		'lengthUnit'                 : 'm',
-		'listColor1'                 : '#ffffff',
-		'listColor2'                 : '#eeeeee',
+		'listColor1'                 : null,  // IGNORED -- use :nth-of-type CSS selector instead
+		'listColor2'                 : null,  // IGNORED -- use :nth-of-type CSS selector instead
 		'loading'                    : false,
 		'locationsPerPage'           : 10,
 		'mapSettings'                : {
@@ -2207,10 +2200,6 @@ Copyright (c) 2018 Paolo Furini
 					$('.' + _this.settings.locationList + ' > ul').append(listHtml);
 				}
 			});
-
-            // UPDATED Changed inline style with custom class
-            $('.' + this.settings.locationList + ' ul li:even').removeClass().addClass(this.settings.listColor1);
-            $('.' + this.settings.locationList + ' ul li:odd').removeClass().addClass(this.settings.listColor2);
 		},
 
 		/**
@@ -2989,10 +2978,6 @@ Copyright (c) 2018 Paolo Furini
 
 			// Handle clicks from the list
 			_this.listClick(_this.map, infowindow, storeStart, page);
-
-            // Updated, added class instaed of inline style
-            $('.' + _this.settings.locationList + ' ul > li:even').removeClass().addClass(_this.settings.listColor1);
-            $('.' + _this.settings.locationList + ' ul > li:odd').removeClass().addClass(_this.settings.listColor2);
 
 			// Visible markers list
 			_this.visibleMarkersList(_this.map, markers);

@@ -38,23 +38,26 @@
     "authorYear": "2016",
     "contribYear": "2018"
   },
+  "browserslist": [
+    "last 2 versions",
+    "safari >= 9",
+    "ie >= 8"
+  ],
   "scripts": {
     "clean": "rimraf dist/",
     "reinstall": "rimraf node_modules && npm cache clean && npm install",
-
-    "uglify:js:markerclusterer": "uglifyjs \"libs/markerclusterer.js\" --compress --mangle --comments --safari10 --source-map includeSources -o dist/js/markerclusterer.min.js",
-    "uglify:js:infobubble": "uglifyjs \"libs/infobubble.js\" --compress --mangle --comments --safari10 --source-map includeSources -o dist/js/infobubble.min.js",
-    "uglify:js:geocode": "uglifyjs \"src/js/geocode.js\" --compress --mangle --comments --safari10 --source-map includeSources -o dist/js/geocode.min.js",
-    "uglify:js:plugin": "uglifyjs \"libs/handlebars-v4.0.5.js\" \"src/js/jquery.storelocator.js\" --compress --mangle --comments --safari10 --source-map includeSources -o dist/js/nx-storelocator.min.js",
-
+    "uglify:js:markerclusterer": "uglifyjs dist/js/markerclusterer.js --compress --mangle --comments --safari10 --source-map \"url='markerclusterer.min.js.map',root='source-maps',base='dist/js',includeSources\" -o dist/js/markerclusterer.min.js",
+    "uglify:js:infobubble": "uglifyjs dist/js/infobubble.js --compress --mangle --comments --safari10 --source-map \"url='infobubble.min.js.map',root='source-maps',base='dist/js',includeSources\" -o dist/js/infobubble.min.js",
+    "uglify:js:geocode": "uglifyjs dist/js/geocode.js --compress --mangle --comments --safari10 --source-map \"url='geocode.min.js.map',root='source-maps',base='dist/js',includeSources\" -o dist/js/geocode.min.js",
+    "uglify:js:plugin": "uglifyjs dist/js/handlebars.js dist/js/nx-storelocator.js --compress --mangle --safari10 --source-map \"url='nx-storelocator.min.js.map',root='source-maps',base='dist/js',includeSources\" -o dist/js/nx-storelocator.min.js",
     "build-task:sass:autoprefixer": "mkdirp dist/css && postcss src/scss/*.scss -d dist/css",
-    "build-task:sass:scss-compile": "mkdirp dist/css && node-sass-chokidar --output-style compact --source-map true --source-map-contents --error-bell dist/css/ -o dist/css",
+    "build-task:sass:scss-compile": "mkdirp dist/css && node-sass-chokidar --output-style compact --source-map true --source-map-contents --source-map-root source-maps --error-bell dist/css/ -o dist/css",
     "build-task:res:templates": "mkdirp dist/templates && cpx --clean \"src/templates/**/*.html\" dist/templates",
     "build-task:res:images": "mkdirp dist && cpx --clean \"src/**/*.{gif,png,svg,jpg,jpeg}\" dist",
     "build-task:js:lint": "jshint -c src/js/.jshintrc src/js && jshint -c test/.jshintrc test/",
+    "build-task:js:copy": "mkdirp dist/js && cp -f src/js/*.js dist/js && cp -f libs/*.js dist/js",
+    "build-task:js:bannerize": "add-banner -t banner.tmpl dist/js/nx-storelocator.js",
     "build-task:js:uglifyjs": "mkdirp dist/js && npm-run-all -p uglify:js:*",
-    "build-task:js:bannerize": "add-banner -t banner.tmpl dist/js/nx-storelocator.min.js",
-
     "sass:build": "npm-run-all build-task:sass:*",
     "sass:watch": "chokidar 'src/scss/**/*.scss' -c 'onerror -t \"jQuery-Store-Locator-Plugin\" -m \"SASS Build Error - Check the Terminal\" \"npm run sass:build\"'",
     "res:build": "npm-run-all -p build-task:res:*",
@@ -77,6 +80,7 @@
     "beepbeep": "^1.2.2",
     "chokidar-cli": "^1.2.0",
     "cli-error-notifier": "^1.0.9",
+    "concat": "^1.0.3",
     "cpx": "^1.5.0",
     "jshint": "^2.9.5",
     "mkdirp": "^0.5.1",

@@ -31,12 +31,14 @@ $arialFont: Arial, Helvetica, sans-serif;
   img {
     max-width: none !important;
     border-radius: 0 !important;
-    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
   }
 
   /* Avoid issues with Google Maps and CSS frameworks */
   > * {
-    box-sizing: content-box !important;
+    -webkit-box-sizing: content-box !important;
+            box-sizing: content-box !important;
   }
 
   .jumbotron{
@@ -157,8 +159,12 @@ $arialFont: Arial, Helvetica, sans-serif;
 
     .list-focus {
       border: 1px solid rgba(0, 82, 147, 0.4);
+      -webkit-box-shadow: 0 0 8px rgba(0, 82, 147, 0.4);
       box-shadow: 0 0 8px rgba(0, 100, 180, 0.4);
+      -webkit-transition: border 0.2s linear 0s, -webkit-box-shadow 0.2s linear 0s;
+      transition: border 0.2s linear 0s, -webkit-box-shadow 0.2s linear 0s;
       transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+      transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s, -webkit-box-shadow 0.2s linear 0s;
     }
 
     .bh-sl-close-directions-container {
@@ -233,7 +239,8 @@ $arialFont: Arial, Helvetica, sans-serif;
     z-index: 10010;
     background: $white;
     border-radius: 10px;
-    box-shadow: 0 0 10px #656565;
+    -webkit-box-shadow: 0 0 10px #656565;
+            box-shadow: 0 0 10px #656565;
 
     .bh-sl-map-container {
       margin-top: 50px; /* increase map container margin */
@@ -271,6 +278,7 @@ $arialFont: Arial, Helvetica, sans-serif;
     margin: -3px 0 0 -1px;
     width: 3px;
     -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
 
@@ -281,6 +289,7 @@ $arialFont: Arial, Helvetica, sans-serif;
 
   &:before {
     -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
 }
