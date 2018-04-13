@@ -2423,11 +2423,11 @@
 				map.panTo(selectedMarker.getPosition());
 				var listLoc = 'left';
 				if (_this.settings.bounceMarker === true) {
-					selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+					selectedMarker.setAnimation(google.maps.Animation.DROP);
 					setTimeout(function () {
 							selectedMarker.setAnimation(null);
 							_this.createInfowindow(selectedMarker, listLoc, infowindow, storeStart, page);
-						}, 700
+						}, 500
 					);
 				}
 				else {
