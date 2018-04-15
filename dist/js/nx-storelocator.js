@@ -589,10 +589,12 @@
 			else {
 				var d = $.Deferred();
 
-				// Loading
-				if (this.settings.loading === true) {
-					$('.' + this.settings.formContainer).append('<div class="' + this.settings.loadingContainer +'"></div>');
-				}
+				if (!_this._doingGetData) {
+                    // Loading
+                    if (this.settings.loading === true) {
+                        $('.' + this.settings.formContainer).append('<div class="' + this.settings.loadingContainer +'"></div>');
+                    }
+                }
 
 				// Data to pass with the AJAX request
 				var ajaxData = {
@@ -609,6 +611,16 @@
 					$.extend(ajaxData, this.settings.ajaxData);
 				}
 
+                // Prevent multiple submissions (discard previous ones)
+                _this._doingGetData = _this._doingGetData || 0;
+                _this._doingGetData++;
+                var cleanAjax = function() {
+                    _this._doingGetData--;
+                    // Loading remove
+                    if (_this.settings.loading === true && _this._doingGetData === 0) {
+                        $('.' + _this.settings.formContainer + ' .' + _this.settings.loadingContainer).remove();
+                    }
+                };
 				// AJAX request
 				$.ajax({
 					type         : 'GET',
@@ -618,13 +630,14 @@
 					dataType     : dataTypeRead,
 					jsonpCallback: (this.settings.dataType === 'jsonp' ? this.settings.callbackJsonp : null)
 				}).done(function(p) {
-					d.resolve(p);
-
-					// Loading remove
-					if (_this.settings.loading === true) {
-						$('.' + _this.settings.formContainer + ' .' + _this.settings.loadingContainer).remove();
-					}
-				}).fail(d.reject);
+				    if (_this._doingGetData === 1) {
+                        d.resolve(p);
+                    }
+					cleanAjax();
+				}).fail(function(jqXHR, textStatus, errorThrown) {
+				    d.reject(jqXHR, textStatus, errorThrown);
+				    cleanAjax();
+                });
 				return d.promise();
 			}
 		},
