@@ -90,7 +90,7 @@ $tabletLarge: '(min-width: 1024px)';
     }
 }
 
-.nx-storelocator__form-input {
+.nx-storelocator__input {
     box-sizing: border-box;
     //font: normal 14px/1.4 $baseFont;
     margin: 15px 0;
@@ -115,11 +115,6 @@ $tabletLarge: '(min-width: 1024px)';
 .nx-storelocator__button--search {
     clear: both;
     margin-top: 6px;
-
-    // Tablet up
-    @media #{$tablet} {
-        margin-left: 10px;
-    }
 }
 /*
 button {
