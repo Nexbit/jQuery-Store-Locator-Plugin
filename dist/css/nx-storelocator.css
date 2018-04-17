@@ -98,7 +98,7 @@
 
 .nx-storelocator__directions-panel .adp-marker { padding: 3px; }
 
-.nx-storelocator__noresults-title { font-weight: bold; margin: 15px; }
+.nx-storelocator__noresults-title { font-weight: bold; font-size: large; margin: 15px; }
 
 .nx-storelocator__noresults-desc { margin: 0 15px; }
 
