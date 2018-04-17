@@ -2713,15 +2713,12 @@
 				});
 			}
 
-			// Name search - using taxonomy filter to handle
-			if (_this.settings.nameSearch === true) {
-				if (typeof searchInput !== 'undefined') {
-					filters[_this.settings.nameAttribute] = [searchInput];
-				}
-			}
-
 			// Taxonomy filtering setup
 			if (_this.settings.taxonomyFilters !== null || _this.settings.nameSearch === true) {
+                // Name search - using taxonomy filter to handle
+                if (searchInput) {
+                    filters[_this.settings.nameAttribute] = [searchInput];
+                }
 
 				for(var k in filters) {
 					if (filters.hasOwnProperty(k) && filters[k].length > 0) {
