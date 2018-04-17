@@ -59,7 +59,7 @@
 /* Locations list */
 .nx-storelocator__loc-list-container { font-size: 13px; height: 530px; overflow-x: auto; width: 100%; /* Tablet large up*/ }
 
-@media (min-width: 1024px) { .nx-storelocator__loc-list-container { width: 30%; } }
+@media (min-width: 1024px) { .nx-storelocator__loc-list-container:not(.nx-storelocator__loc-list-container--map-hidden) { width: 30%; } }
 
 .nx-storelocator__loc-list { display: block; clear: left; float: left; width: 100%; list-style: none; margin: 0; padding: 0; }
 

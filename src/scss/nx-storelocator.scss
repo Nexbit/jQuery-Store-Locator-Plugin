@@ -205,7 +205,9 @@ button {
 
     // Tablet large up
     @media #{$tabletLarge} {
-        width: 30%;
+        &:not(.nx-storelocator__loc-list-container--map-hidden) {
+            width: 30%;
+        }
     }
 }
 

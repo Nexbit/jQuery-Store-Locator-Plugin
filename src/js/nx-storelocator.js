@@ -76,6 +76,7 @@
 		'visibleMarkersList'         : false,
 		'xmlElement'                 : 'marker',
         'searchExact'                : false,
+        'hideMapIfNoResults'         : false,
 		// HTML elements
 		'addressID'                  : 'nx-sl-address-input',
 		'closeIcon'                  : 'nx-storelocator__close-icon',
@@ -706,6 +707,16 @@
 				});
 			}
 		},
+
+        _toggleMap: function(show) {
+		    if (show) {
+                $('#' + this.settings.mapID).show();
+                $('.' + this.settings.locationList).removeClass(this.settings.locationList + '--map-hidden');
+            } else {
+                $('#' + this.settings.mapID).hide();
+                $('.' + this.settings.locationList).addClass(this.settings.locationList + '--map-hidden');
+            }
+        },
 
 		/**
 		 * Geocode function used for auto geocode setting and geocodeID button
@@ -2256,6 +2267,10 @@
 				myOptions = this.settings.mapSettings,
 				noResults;
 
+            if (this.settings.hideMapIfNoResults) {
+                this._toggleMap();
+            }
+
 			// Create the map
 			this.map = new google.maps.Map(document.getElementById(this.settings.mapID), myOptions);
 
@@ -2783,6 +2798,11 @@
 				locationset = [];
 				locationset = featuredset.concat(normalset);
 			}
+
+            if (_this.settings.hideMapIfNoResults) {
+                // Ensure the map div is visible (emptyResult() may have hidden it)
+                _this._toggleMap(true);
+            }
 
 			// Slide in the map container
 			if (_this.settings.slideMap === true) {
