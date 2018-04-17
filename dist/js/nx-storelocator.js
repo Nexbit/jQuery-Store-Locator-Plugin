@@ -1,5 +1,5 @@
 /**
- * nx-storelocator v3.0.99
+ * nx-storelocator v3.0.100
  *
  * https://github.com/Nexbit/jQuery-Store-Locator-Plugin
  *

@@ -35,6 +35,16 @@ filtering.
 
 ## Changelog
 
+### Version 3.0.100
+
+* Added searchExact option to toggle partial match search by store name
+* Added an hideMapIfNoResult option to hide the map if no results found
+* Complete refactoring of the build process to use only npm scripts
+* Fixed styles using flat naming (BEM inspired) and various adjustments
+* Fixed multiple ajax submissions not overlapping anymore: the last one takes over the preceding ones.
+* Fixed a couple of bugs with altDistanceNoResult option used along with other options
+* Fixed a bug when the name input box is empty
+
 ### Version 3.0.0
 
 Version 3 has a breaking change with the dataLocation and dataType settings switching the default from XML to JSON.
