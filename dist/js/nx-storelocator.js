@@ -2825,7 +2825,11 @@
 			}
 
 			// Alternative method to display no results if locations are too far away instead of all locations.
-			if (_this.settings.altDistanceNoResult === true && _this.settings.distanceAlert > 0 && nearestLoc.distance > _this.settings.distanceAlert) {
+			if (_this.settings.altDistanceNoResult === true &&
+                !_this.settings.maxDistance &&
+                _this.settings.distanceAlert > 0 &&
+                nearestLoc !== undefined && nearestLoc.distance > _this.settings.distanceAlert) {
+			    
 				_this.emptyResult();
 				return;
 			}
