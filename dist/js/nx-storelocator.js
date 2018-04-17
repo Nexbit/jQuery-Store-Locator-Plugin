@@ -2829,7 +2829,7 @@
                 !_this.settings.maxDistance &&
                 _this.settings.distanceAlert > 0 &&
                 nearestLoc !== undefined && nearestLoc.distance > _this.settings.distanceAlert) {
-			    
+
 				_this.emptyResult();
 				return;
 			}
@@ -2903,24 +2903,6 @@
 				google.maps.event.trigger(_this.map, 'resize');
 				_this.map.setCenter(center);
 			});
-
-            if (_this.settings.mapSettings.zoom !== 0) {
-                // Reset the zoom change only the first time the map is rendered
-                _this._initialZoomChangedListener = _this.map.addListener('zoom_changed', function() {
-                    var zoomChangeBoundsListener =
-                        _this.map.addListener('bounds_changed', function() {
-                            if (_this._initialZoom) {
-                                // Reset the zoom to the initial requested value
-                                _this.map.setZoom(_this.settings.mapSettings.zoom);
-                                _this._initialZoom = false;
-                                google.maps.event.removeListener(_this._initialZoomChangedListener);
-                                delete _this._initialZoomChangedListener;
-                            }
-                            google.maps.event.removeListener(zoomChangeBoundsListener);
-                        });
-                });
-                _this._initialZoom = true;
-            }
 
 			// Add map drag listener if setting is enabled and re-search on drag end
 			if (_this.settings.dragSearch === true ) {
